@@ -30,13 +30,13 @@ class _RecipeUserListScreen extends State<RecipeUserListScreen> {
 
       if (querySnapshot.docs.isNotEmpty) {
         for (var doc in querySnapshot.docs.toList()) {
-          Map map = {
-            "title": doc['title'],
-            "description": doc['description'],
-            "ingredients": doc['ingredients'],
-            "id": doc.id
-          };
-          list.add(map);
+            Map map = {
+              "title": doc['title'],
+              "description": doc['description'],
+              "ingredients": doc['ingredients'],
+              "id": doc.id
+            };
+            list.add(map);
         }
       }
       return list;
@@ -89,101 +89,107 @@ class _RecipeUserListScreen extends State<RecipeUserListScreen> {
   Widget build(BuildContext context) {
     var body = Container(
         child: Column(children: <Widget>[
-      Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: TextField(
-          onChanged: (value) {
-            filterSearchResults(value);
-          },
-          controller: searchController,
-          decoration: InputDecoration(
-              prefixIcon: Icon(Icons.search),
-              suffixIcon: IconButton(
-                icon: Icon(Icons.clear),
-                onPressed: () {
-                  filterSearchResults("");
-                  searchController.text="";
+          Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: TextField(
+                onChanged: (value) {
+                  filterSearchResults(value);
                 },
-              ),
-              hintText: 'Search...',
-              border: OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: Colors.blue,
-                    width: 5.0),
+                controller: searchController,
+                decoration: InputDecoration(
+                    prefixIcon: Icon(Icons.search),
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.clear),
+                      onPressed: () {
+                        filterSearchResults("");
+                        searchController.text="";
+                      },
+                    ),
+                    hintText: 'Search...',
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          color: Colors.blue,
+                          width: 5.0),
+                    )
+                ),
               )
           ),
-        )
-      ),
-      Expanded(
-          child: ListView.builder(
-              itemCount: docs.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => RecipeViewScreen(
-                                  title: docs[index]['title'],
-                                  description: docs[index]['description'],
-                                  ingredients: docs[index]['ingredients'],
-                            )));
-                      },
-                      child: Container(
-                        margin: EdgeInsets.all(5),
-                        child: Container(
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 22, vertical: 10),
-                          width: MediaQuery.of(context).size.width,
-                          height: 180,
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 10.0,
+          Expanded(
+              child: ListView.builder(
+                  itemCount: docs.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RecipeViewScreen(
+                                        title: docs[index]['title'],
+                                        description: docs[index]['description'],
+                                        ingredients: docs[index]['ingredients']
+                                    )));
+                          },
+                          child: Container(
+                            margin: EdgeInsets.all(5),
+                            child: Container(
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: 22, vertical: 10),
+                              width: MediaQuery.of(context).size.width,
+                              height: 70,
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(15),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.6),
+                                      offset: Offset(
+                                        0.0,
+                                        10.0,
+                                      ),
+                                      blurRadius: 10.0,
+                                      spreadRadius: -6.0,
+                                    ),
+                                  ]
                               ),
-                              Text(
-                                docs[index]['title'].toString(),
-                                style: TextStyle(
-                                    fontSize: 20.0,
-                                    fontFamily: "Brand Bold",
-                                    color: Colors.white),
-                                textAlign: TextAlign.left,
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Text(
+                                    docs[index]['title'].toString(),
+                                    style: TextStyle(
+                                        fontSize: 20.0,
+                                        fontFamily: "Brand Bold",
+                                        color: Colors.white),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                  SizedBox(
+                                    height: 5.0,
+                                  ),
+                                  Text(
+                                    docs[index]['description'].toString() +
+                                        "," +
+                                        docs[index]['ingredients'].toString(),
+                                    style: TextStyle(
+                                        fontSize: 12.0, color: Colors.white),
+                                    textAlign: TextAlign.center,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                  )
+                                ],
                               ),
-                              SizedBox(
-                                height: 5.0,
-                              ),
-                              Text(
-                                docs[index]['description'].toString(),
-                                style: TextStyle(
-                                    fontSize: 12.0, color: Colors.white),
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                              ),
-                              SizedBox(
-                                height: 5.0,
-                              ),
-                              Text(
-                                docs[index]['ingredients'].toString(),
-                                style: TextStyle(
-                                    fontSize: 12.0, color: Colors.white),
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                              )
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
-                    )
-                );
-              }
-            )
+                        )
+                    );
+                  }
+              )
           )
         ]
-      )
+        )
     );
 
     return Scaffold(

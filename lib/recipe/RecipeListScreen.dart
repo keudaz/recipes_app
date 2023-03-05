@@ -133,7 +133,7 @@ class _RecipeListScreen extends State<RecipeListScreen> {
     var body = Container(
         child: Column(children: <Widget>[
       Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(10.0),
         child: TextField(
           onChanged: (value) {
             filterSearchResults(value);
@@ -180,7 +180,7 @@ class _RecipeListScreen extends State<RecipeListScreen> {
                           margin: EdgeInsets.symmetric(
                               horizontal: 22, vertical: 10),
                           width: MediaQuery.of(context).size.width,
-                          height: 200,
+                          height: 100,
                           decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(15),
@@ -194,16 +194,7 @@ class _RecipeListScreen extends State<RecipeListScreen> {
                                 blurRadius: 10.0,
                                 spreadRadius: -6.0,
                               ),
-                            ],
-                            image: DecorationImage(
-                              colorFilter: ColorFilter.mode(
-                                Colors.black.withOpacity(0.5),
-                                BlendMode.multiply,
-                              ),
-                              image:
-                                  NetworkImage(docs[index]['pic'].toString()),
-                              fit: BoxFit.cover,
-                            ),
+                            ]
                           ),
                           child: Column(
                             children: [
@@ -224,48 +215,12 @@ class _RecipeListScreen extends State<RecipeListScreen> {
                               Text(
                                 docs[index]['description'].toString() +
                                     "," +
-                                    docs[index]['province'].toString() +
-                                    "," +
-                                    docs[index]['ingredients'].toString() +
-                                    "," +
-                                    docs[index]['city'].toString() +
-                                    ", Nearest Town: " +
-                                    docs[index]['nearestTown'].toString() +
-                                    ".",
+                                    docs[index]['ingredients'].toString(),
                                 style: TextStyle(
                                     fontSize: 12.0, color: Colors.white),
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
-                              ),
-                              SizedBox(
-                                height: 5.0,
-                              ),
-                              Text(
-                                docs[index]['dis'].toString(),
-                                style: TextStyle(
-                                    fontSize: 12.0, color: Colors.white),
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                              ),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-                              Text(
-                                docs[index]['phone'].toString(),
-                                style: TextStyle(
-                                    fontSize: 18.0, color: Colors.white),
-                                textAlign: TextAlign.left,
-                              ),
-                              SizedBox(
-                                height: 5.0,
-                              ),
-                              Text(
-                                docs[index]['email'].toString(),
-                                style: TextStyle(
-                                    fontSize: 16.0, color: Colors.white),
-                                textAlign: TextAlign.left,
                               ),
                               Align(
                                 child: Row(

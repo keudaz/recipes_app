@@ -119,7 +119,7 @@ class _UserDashboard extends State<UserDashboard> {
                       onPressed: ()
                       {
 
-                        Navigator.pushNamedAndRemoveUntil(context, RecipeUserListScreen.idScreen, (route) => true);
+                        Navigator.pushNamedAndRemoveUntil(context, RecipeListScreen.idScreen, (route) => true);
 
                       },
                     ),
@@ -138,7 +138,7 @@ class _UserDashboard extends State<UserDashboard> {
                       onPressed: ()
                       {
 
-                        Navigator.pushNamedAndRemoveUntil(context, RecipeListScreen.idScreen, (route) => true);
+                        Navigator.pushNamedAndRemoveUntil(context, RecipeUserListScreen.idScreen, (route) => true);
 
                       },
                     ),
