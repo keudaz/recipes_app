@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cool_alert/cool_alert.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -227,7 +228,7 @@ class _RecipeEditScreen extends State<RecipeEditScreen> {
 
   void insertData(BuildContext context) async {
     try {
-      await firestore.collection("hotels").doc(widget.id.toString()).update({
+      await FirebaseDatabase.instance.reference().child("recipe").child(widget.id.toString()).update({
         'title': titleTextEditingController.text,
         'description': descriptionTextEditingController.text,
         'ingredients': ingredientsTextEditingController.text,

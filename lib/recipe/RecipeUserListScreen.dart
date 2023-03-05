@@ -30,10 +30,11 @@ class _RecipeUserListScreen extends State<RecipeUserListScreen> {
 
       Map recipe = snapshot.value as Map;
       recipe.forEach((key, value) {
+        print(recipe);
           Map map = {
             "title": value['title'],
             "description": value['description'],
-            "province": value['province'],
+            "ingredients": value['ingredients'],
             "id": value.id
           };
           list.add(map);
@@ -71,9 +72,7 @@ class _RecipeUserListScreen extends State<RecipeUserListScreen> {
     List temp_list=[];
     if(query.isNotEmpty) {
       for (var temp in all_docs) {
-        if (temp['name'].contains(query)||temp['address'].contains(query)||temp['province'].contains(query)
-            ||temp['district'].contains(query)||temp['city'].contains(query)||temp['nearestTown'].contains(query)
-            ||temp['email'].contains(query)||temp['phone'].contains(query)){
+        if (temp['title'].contains(query)||temp['description'].contains(query)||temp['ingredients'].contains(query)){
           temp_list.add(temp);
         }
       }
@@ -140,37 +139,13 @@ class _RecipeUserListScreen extends State<RecipeUserListScreen> {
                               horizontal: 22, vertical: 10),
                           width: MediaQuery.of(context).size.width,
                           height: 180,
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(15),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.6),
-                                offset: Offset(
-                                  0.0,
-                                  10.0,
-                                ),
-                                blurRadius: 10.0,
-                                spreadRadius: -6.0,
-                              ),
-                            ],
-                            image: DecorationImage(
-                              colorFilter: ColorFilter.mode(
-                                Colors.black.withOpacity(0.5),
-                                BlendMode.multiply,
-                              ),
-                              image:
-                                  NetworkImage(docs[index]['pic'].toString()),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
                           child: Column(
                             children: [
                               SizedBox(
                                 height: 10.0,
                               ),
                               Text(
-                                docs[index]['name'].toString(),
+                                docs[index]['title'].toString(),
                                 style: TextStyle(
                                     fontSize: 20.0,
                                     fontFamily: "Brand Bold",
@@ -181,16 +156,7 @@ class _RecipeUserListScreen extends State<RecipeUserListScreen> {
                                 height: 5.0,
                               ),
                               Text(
-                                docs[index]['address'].toString() +
-                                    "," +
-                                    docs[index]['province'].toString() +
-                                    "," +
-                                    docs[index]['district'].toString() +
-                                    "," +
-                                    docs[index]['city'].toString() +
-                                    ", Nearest Town: " +
-                                    docs[index]['nearestTown'].toString() +
-                                    ".",
+                                docs[index]['description'].toString(),
                                 style: TextStyle(
                                     fontSize: 12.0, color: Colors.white),
                                 textAlign: TextAlign.center,
@@ -201,30 +167,12 @@ class _RecipeUserListScreen extends State<RecipeUserListScreen> {
                                 height: 5.0,
                               ),
                               Text(
-                                docs[index]['dis'].toString(),
+                                docs[index]['ingredients'].toString(),
                                 style: TextStyle(
                                     fontSize: 12.0, color: Colors.white),
                                 textAlign: TextAlign.center,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
-                              ),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-                              Text(
-                                docs[index]['phone'].toString(),
-                                style: TextStyle(
-                                    fontSize: 18.0, color: Colors.white),
-                                textAlign: TextAlign.left,
-                              ),
-                              SizedBox(
-                                height: 5.0,
-                              ),
-                              Text(
-                                docs[index]['email'].toString(),
-                                style: TextStyle(
-                                    fontSize: 16.0, color: Colors.white),
-                                textAlign: TextAlign.left,
                               )
                             ],
                           ),

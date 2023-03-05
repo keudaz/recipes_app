@@ -32,10 +32,11 @@ class _RecipeListScreen extends State<RecipeListScreen> {
       Map recipe = snapshot.value as Map;
       recipe.forEach((key, value) {
         if (value['userid'].toString() ==storage.getItem("userid").toString()) {
+          print(recipe);
           Map map = {
             "title": value['title'],
             "description": value['description'],
-            "province": value['province'],
+            "ingredients": value['ingredients'],
             "id": value.id
           };
           list.add(map);
