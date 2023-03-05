@@ -22,24 +22,23 @@ class _RecipeUserListScreen extends State<RecipeUserListScreen> {
 
   String name = "", email = "", imgUrl = "";
 
-  Future<List?> hotelsList() async {
-    DataSnapshot snapshot;
+  Future<List?> allRecipe() async {
+    QuerySnapshot querySnapshot;
     List list = [];
     try {
-      snapshot = await FirebaseDatabase.instance.ref("recipe").get();
+      querySnapshot = await firestore.collection('recipe').get();
 
-      Map recipe = snapshot.value as Map;
-      recipe.forEach((key, value) {
-        print(recipe);
+      if (querySnapshot.docs.isNotEmpty) {
+        for (var doc in querySnapshot.docs.toList()) {
           Map map = {
-            "title": value['title'],
-            "description": value['description'],
-            "ingredients": value['ingredients'],
-            "id": value.id
+            "title": doc['title'],
+            "description": doc['description'],
+            "ingredients": doc['ingredients'],
+            "id": doc.id
           };
           list.add(map);
-      });
-
+        }
+      }
       return list;
     } catch (e) {
       print(e);
@@ -59,7 +58,7 @@ class _RecipeUserListScreen extends State<RecipeUserListScreen> {
       email = storage.getItem('email');
       imgUrl = storage.getItem('pic');
     });
-    this.hotelsList().then(
+    this.allRecipe().then(
       (value) => {
         setState(() {
           docs = value!;

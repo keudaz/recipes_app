@@ -228,7 +228,7 @@ class _RecipeEditScreen extends State<RecipeEditScreen> {
 
   void insertData(BuildContext context) async {
     try {
-      await FirebaseDatabase.instance.reference().child("recipe").child(widget.id.toString()).update({
+      await firestore.collection("recipe").doc(widget.id.toString()).update({
         'title': titleTextEditingController.text,
         'description': descriptionTextEditingController.text,
         'ingredients': ingredientsTextEditingController.text,
