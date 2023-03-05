@@ -1,30 +1,47 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'Screens/loginScreen.dart';
+import 'Screens/registerationScreen.dart';
+import 'Screens/welcomeScreen.dart';
+import 'Screens/userDashboard.dart';
+import 'recipe/RecipeEditScreen.dart';
+import 'recipe/RecipeListScreen.dart';
+import 'recipe/RecipeScreen.dart';
+import 'recipe/RecipeUserListScreen.dart';
+import 'recipe/RecipeViewScreen.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'Recipes app',
+    theme: ThemeData(
+    primarySwatch: Colors.blue,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
+    ),
+    initialRoute: WelcomeScreen.idScreen,
+    routes:
+    {
+      WelcomeScreen.idScreen: (context) => WelcomeScreen(),
+      RegisterationScreen.idScreen: (context) => RegisterationScreen(),
+      LoginScreen.idScreen: (context) => LoginScreen(),
+      UserDashboard.idScreen: (context) => UserDashboard(),
+      RecipeScreen.idScreen: (context) => RecipeScreen(),
+      RecipeListScreen.idScreen: (context) => RecipeListScreen(),
+      RecipeUserListScreen.idScreen: (context) => RecipeUserListScreen(),
+      RecipeViewScreen.idScreen: (context) => RecipeViewScreen(title:'',description:'',ingredients:''),
+      RecipeEditScreen.idScreen: (context) => RecipeEditScreen(id:'',title:'',description:'',ingredients:'')
+
+    },
+      debugShowCheckedModeBanner: false,
     );
   }
 }
