@@ -75,9 +75,7 @@ class _RecipeListScreen extends State<RecipeListScreen> {
     List temp_list=[];
     if(query.isNotEmpty) {
       for (var temp in all_docs) {
-        if (temp['title'].contains(query)||temp['description'].contains(query)||temp['province'].contains(query)
-            ||temp['ingredients'].contains(query)||temp['city'].contains(query)||temp['nearestTown'].contains(query)
-            ||temp['email'].contains(query)||temp['phone'].contains(query)){
+        if (temp['title'].contains(query)||temp['description'].contains(query)||temp['ingredients'].contains(query)){
           temp_list.add(temp);
         }
       }
@@ -102,7 +100,7 @@ class _RecipeListScreen extends State<RecipeListScreen> {
   }
 
   void delete_firestore(String id) {
-    firestore.collection('hotels').doc(id).delete();
+    FirebaseDatabase.instance.reference().child("recipe").child(id).remove();
   }
 
   // delete function
